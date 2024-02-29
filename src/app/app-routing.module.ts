@@ -1,3 +1,4 @@
+import { AuthGuard } from './_helpers/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -11,7 +12,7 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: '',
@@ -23,7 +24,8 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () =>
-          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule),
+          canActivate: [AuthGuard]
       },
       {
         path: 'theme',
