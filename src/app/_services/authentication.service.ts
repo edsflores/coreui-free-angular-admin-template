@@ -25,7 +25,7 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
+        return this.http.post<any>(`${environment.apiUrl}/api/auth/signin`, { username, password },{responseType : 'json'})
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
@@ -33,6 +33,17 @@ export class AuthenticationService {
                 return user;
             }));
     }
+
+
+    register(username: string, password: string, email: string) {
+      return this.http.post<any>(`${environment.apiUrl}/api/auth/signup`, { username: username, email: email, password: password })
+          .pipe(map(user => {
+              // store user details and jwt token in local storage to keep user logged in between page refreshes
+              localStorage.setItem('user', JSON.stringify(user));
+              this.userSubject.next(user);
+              return user;
+          }));
+  }
 
     logout() {
         // remove user from local storage to log user out

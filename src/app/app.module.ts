@@ -1,8 +1,11 @@
+import { MessagesModule } from './containers/messages/messages.module';
+import { MessageInterceptor } from './_helpers/message.interceptor';
+import { MessagesComponent } from './containers/messages/messages.component';
 import { NgModule } from '@angular/core';
-import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
@@ -16,6 +19,8 @@ import { AppComponent } from './app.component';
 import { DefaultFooterComponent, DefaultHeaderComponent, DefaultLayoutComponent } from './containers';
 
 import {
+  AlertComponent,
+  AlertModule,
   AvatarModule,
   BadgeModule,
   BreadcrumbModule,
@@ -37,18 +42,20 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { PagesModule } from './views/pages/pages.module';
+import { fakeBackendProvider, ErrorInterceptor, JwtInterceptor } from './_helpers/index';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
   DefaultHeaderComponent,
-  DefaultLayoutComponent
-];
+  DefaultLayoutComponent];
 
 @NgModule({
   declarations: [AppComponent, ...APP_CONTAINERS],
   imports: [
     BrowserModule,
+    AlertModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AvatarModule,
@@ -74,7 +81,17 @@ const APP_CONTAINERS = [
     ListGroupModule,
     CardModule,
     NgScrollbarModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    CommonModule,
+    PagesModule,
+    MessagesModule
+  ],
+  exports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    PagesModule
   ],
   providers: [
     {
@@ -82,7 +99,11 @@ const APP_CONTAINERS = [
       useClass: HashLocationStrategy
     },
     IconSetService,
-    Title
+    Title,
+    fakeBackendProvider,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: MessageInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
