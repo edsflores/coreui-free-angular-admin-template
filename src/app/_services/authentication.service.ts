@@ -25,12 +25,15 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/api/auth/signin`, { username, password },{responseType : 'json'})
+        return this.http.post<User>(`${environment.apiUrl}/api/auth/signin`, { username, password },{responseType : 'json'})
             .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-                this.userSubject.next(user);
-                return user;
+                if(user.accessToken != null && user.accessToken != undefined && user.accessToken != '' && user.accessToken != 'undefined') {
+                  localStorage.setItem('user', JSON.stringify(user));
+                  this.userSubject.next(user);
+                  return user;
+                } else {
+                  return null;
+                }
             }));
     }
 
