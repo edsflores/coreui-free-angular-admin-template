@@ -7,7 +7,6 @@
           <c-card class="p-4">
             <app-messages></app-messages>
             <c-card-body>
-
               <form [formGroup]="loginForm" cForm (ngSubmit)="onSubmit()">
                 <h1>Login</h1>
                 <p class="text-medium-emphasis">Entre com seu usuário e senha</p>
@@ -38,6 +37,13 @@
                   <c-col class="text-right" xs="6">
                     <button cButton class="px-0" color="link">
                       Esqueceu a senha?
+                    </button>
+                  </c-col>
+                </c-row>
+                <c-row>
+                  <c-col class="text-center" xs="12">
+                    <button cButton class="px-0" routerLink="/register" color="link" >
+                      Cadastrar Usuário
                     </button>
                   </c-col>
                 </c-row>

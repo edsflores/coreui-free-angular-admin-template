@@ -7,6 +7,7 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
+import { PublicLayoutComponent } from './containers/public-layout/public-layout.component';
 
 const routes: Routes = [
   {
@@ -18,14 +19,13 @@ const routes: Routes = [
     path: '',
     component: DefaultLayoutComponent,
     data: {
-      title: 'Home'
+      title: 'Home',
     },
     children: [
       {
         path: 'dashboard',
-        loadChildren: () =>
-          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule),
-          canActivate: [AuthGuard]
+        loadChildren: () => import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'theme',
@@ -74,6 +74,23 @@ const routes: Routes = [
       },
     ]
   },
+  {
+    path: '',
+    component: PublicLayoutComponent,
+    data: {
+      title: 'Home',
+    },
+    children: [
+      {
+        path: 'register',
+        component: RegisterComponent,
+        data: {
+          title: 'Register Page'
+        }
+      },
+    ]
+  },
+
   {
     path: '404',
     component: Page404Component,

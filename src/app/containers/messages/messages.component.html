@@ -1,6 +1,8 @@
 <c-alert
          [(visible)]="visible"
          [dismissible]="dismissible"
-         color="warning">
-         A simple warning alert—check it out!
+         [color]="color"
+         fade
+         *ngIf="visible">
+  {{errorMessage}}
 </c-alert>

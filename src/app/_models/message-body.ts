@@ -1,7 +1,7 @@
 export const enum MessageType {
-  "WARNING",
-  "ERROR",
-  "OK"
+  "WARNING" = 'WARNING',
+  "ERROR" = 'ERROR',
+  "OK" = 'OK'
 }
 
 export interface MessageBody {

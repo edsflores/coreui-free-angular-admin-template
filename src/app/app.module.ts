@@ -1,3 +1,4 @@
+import { PublicLayoutComponent } from './containers/public-layout/public-layout.component';
 import { MessagesModule } from './containers/messages/messages.module';
 import { MessageInterceptor } from './_helpers/message.interceptor';
 import { MessagesComponent } from './containers/messages/messages.component';
@@ -49,13 +50,15 @@ import { fakeBackendProvider, ErrorInterceptor, JwtInterceptor } from './_helper
 const APP_CONTAINERS = [
   DefaultFooterComponent,
   DefaultHeaderComponent,
-  DefaultLayoutComponent];
+  DefaultLayoutComponent,
+  PublicLayoutComponent];
 
 @NgModule({
   declarations: [AppComponent, ...APP_CONTAINERS],
   imports: [
     BrowserModule,
     AlertModule,
+
     BrowserAnimationsModule,
     AppRoutingModule,
     AvatarModule,
