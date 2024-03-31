@@ -1,3 +1,4 @@
+import { FormComponent } from './views/form/form.component';
 import { AuthGuard } from './_helpers/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -82,10 +83,10 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'register',
-        component: RegisterComponent,
+        path: 'public-form',
+        component: FormComponent,
         data: {
-          title: 'Register Page'
+          title: 'Form'
         }
       },
     ]

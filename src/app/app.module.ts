@@ -1,3 +1,4 @@
+import { FormModule } from './views/form/form.module';
 import { PublicLayoutComponent } from './containers/public-layout/public-layout.component';
 import { MessagesModule } from './containers/messages/messages.module';
 import { MessageInterceptor } from './_helpers/message.interceptor';
@@ -30,7 +31,6 @@ import {
   CardModule,
   DropdownModule,
   FooterModule,
-  FormModule,
   GridModule,
   HeaderModule,
   ListGroupModule,
@@ -46,6 +46,7 @@ import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PagesModule } from './views/pages/pages.module';
 import { fakeBackendProvider, ErrorInterceptor, JwtInterceptor } from './_helpers/index';
+
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -88,7 +89,8 @@ const APP_CONTAINERS = [
     FormsModule,
     CommonModule,
     PagesModule,
-    MessagesModule
+    MessagesModule,
+    FormModule
   ],
   exports: [
     CommonModule,
