@@ -1,1 +1,13 @@
-<p>form works!</p>
+
+<c-container>
+  <c-row>
+    <c-col>
+      <form [formGroup]="form" (ngSubmit)="onSubmit(model)">
+        <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+        <button type="submit" class="">Submit</button>
+      </form>
+    </c-col>
+
+  </c-row>
+
+</c-container>

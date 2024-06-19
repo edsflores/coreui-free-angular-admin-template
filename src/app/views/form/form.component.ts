@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
   selector: 'app-form',
@@ -10,7 +11,7 @@ export class FormComponent {
 
   form = new FormGroup({});
   model = { email: 'email@gmail.com' };
-  fields: any[] = [
+  fields: FormlyFieldConfig[] = [
     {
       key: 'email',
       type: 'input',
@@ -18,7 +19,14 @@ export class FormComponent {
         label: 'Email address',
         placeholder: 'Enter email',
         required: true,
-      }
+      },
+      validation: {
+        messages: {
+          required: (error: any, field: FormlyFieldConfig) => "Campo de preenchimento obrigatório",
+        },
+      },
+
+
     }
   ];
 

@@ -46,6 +46,9 @@ import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PagesModule } from './views/pages/pages.module';
 import { fakeBackendProvider, ErrorInterceptor, JwtInterceptor } from './_helpers/index';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import { FormlyMaterialModule } from '@ngx-formly/material';
 
 
 const APP_CONTAINERS = [
@@ -90,7 +93,10 @@ const APP_CONTAINERS = [
     CommonModule,
     PagesModule,
     MessagesModule,
-    FormModule
+    FormModule,
+    FormlyModule.forRoot(),
+    FormlyBootstrapModule,
+    FormlyMaterialModule
   ],
   exports: [
     CommonModule,
